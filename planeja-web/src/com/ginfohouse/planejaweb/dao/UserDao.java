@@ -1,4 +1,4 @@
-package com.ginfohouse.planejaweb;
+package com.ginfohouse.planejaweb.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
