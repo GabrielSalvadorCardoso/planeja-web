@@ -2,11 +2,8 @@ package com.ginfohouse.planejaweb.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.ginfohouse.planejaweb.dao.ContaPoupancaDao;
-import com.ginfohouse.planejaweb.dao.UserDao;
 import com.ginfohouse.planejaweb.model.ContaPoupanca;
-import com.ginfohouse.planejaweb.model.User;
 
 //Este Controller receberá todas as requisições
 @Controller
@@ -19,23 +16,9 @@ public class ServletController{
 		return "description";
 	}
 	
-	@RequestMapping("/cadastro")
-	public String cadastro() {
-		return "cadastro";
-	}
-	
 	@RequestMapping("/criar-poupanca")
 	public String formContaPupanca() {
 		return "criar-poupanca";
-	}
-	
-	//O Spring preecherá o objeto User automaticamente desde que os nome dos inputs correspondam aos seus atributos
-	@RequestMapping("/addUser")
-	public String addUser(User user) {
-		UserDao dao = new UserDao();
-		dao.adiciona(user);
-		
-		return "usuario-adicionado";
 	}
 	
 	@RequestMapping("/criaContaPoupanca")
@@ -53,6 +36,5 @@ public class ServletController{
 			return "criar-poupanca";
 		}
 	}
-	
 }
 

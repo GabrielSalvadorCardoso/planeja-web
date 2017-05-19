@@ -11,8 +11,8 @@
 		<input type="number" name="valor" min="0" step="100" id="valor" /> <br />
 		
 		<input type="hidden" name="taxaJuros" value="0.5"/>
-		<!-- O idUser deverá ser recuperado do usuario logado na sessão, portanto o value="4" pe temporario, apenas para testes -->
-		<input type="hidden" name="idUser" value="4" />
+		<!-- O idUser é retornado diretamente do usuario registrado na sessão -->
+		<input type="hidden" name="idUser" value="${usuario.id}" />
 		
 		<input type="submit" value="enviar" />
 	</form>
