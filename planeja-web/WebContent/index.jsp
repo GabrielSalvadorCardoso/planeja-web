@@ -5,6 +5,7 @@
 	<title>Index</title>
 </head>
 <body>
-	<h1>Teste</h1>
+	<h1>Planeja Web</h1>
+	<p><a href="efetuarLogin?user='${usuario.user}'&pass='${usuario.pass}'">Começe agora!</a></p>
 </body>
 </html>

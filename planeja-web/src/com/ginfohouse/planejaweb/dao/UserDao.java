@@ -41,7 +41,7 @@ public class UserDao {
 				usuario.setId(rs.getLong("id"));
 				usuario.setNome(rs.getString("nome"));
 				usuario.setUser(rs.getString("user"));
-				//Não retornamos a senha do usuario por questão de segurança
+				usuario.setPass(rs.getString("pass"));
 			}
 			return usuario;			
 						

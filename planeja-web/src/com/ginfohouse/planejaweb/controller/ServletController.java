@@ -1,32 +1,29 @@
 package com.ginfohouse.planejaweb.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.ginfohouse.planejaweb.dao.ContaPoupancaDao;
 import com.ginfohouse.planejaweb.model.ContaPoupanca;
+import com.ginfohouse.planejaweb.model.User;
 
-//Este Controller receberá todas as requisições
+//Este Controller receberá todas as requisições referentes as contas
 @Controller
 public class ServletController{
-	//A URL planeja-web/descricao aciona esta Action
-	@RequestMapping("/descricao")
-	public String descricao() {		
-		//O Spring tentará despachar a requisição para /WEB-INF/view/description.jsp
-		//O sufixo e o prefixo não precisam estar no retorno poi já foram definidos em spring-context.xml
-		return "description";
-	}
 	
+	//A URL planeja-web/ciar-poupanca aciona esta Action
 	@RequestMapping("/criar-poupanca")
 	public String formContaPupanca() {
+		//O Spring tentará despachar a requisição para /WEB-INF/view/criar-poupanca.jsp
+		//O sufixo e o prefixo não precisam estar no retorno pois já foram definidos em spring-context.xml
 		return "criar-poupanca";
 	}
 	
 	@RequestMapping("/criaContaPoupanca")
 	public String criaContaPoupanca(ContaPoupanca cPoupanca) {
-		System.out.println("ID Conta: " + cPoupanca.getIdConta() +
-							"\nID Usuario: " + cPoupanca.getIdUser()+
-							"\nTaxa de Juros: " + cPoupanca.getTaxaJuros()+
-							"\nValor: " + cPoupanca.getValor());
 		//Se o usuario acionar a url 'planeja-web/criaPoupanca' sem inserir dados, ele será direcionado para o form
 		try {			
 			ContaPoupancaDao dao = new ContaPoupancaDao();
@@ -35,6 +32,17 @@ public class ServletController{
 		} catch(NullPointerException e) {
 			return "criar-poupanca";
 		}
+	}
+	
+	@RequestMapping("/mostrarContasPoupanca")
+	public String monstrarContas(User user, Model model) {//Model permite associar um objeto do modelo para a view
+		ContaPoupancaDao dao = new ContaPoupancaDao();
+		List<ContaPoupanca> contasP = dao.select(user.getId());
+		model.addAttribute("contasPoupanca", contasP);//A lista de contas poupança estará disponivel na view
+		
+		return "conta/mostrar-contas";
+		//Futuramente será implementado um redirecionamento para a listagem de Fundos de Renda Fixa(FRF)
+		//return "forward:mostrarContasFRF";
 	}
 }
 

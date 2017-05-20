@@ -17,11 +17,12 @@ public class LoginController {
 	
 	@RequestMapping("/efetuarLogin")
 	public String efetuaLogin(User user, HttpSession session) {
-		System.out.println("User: " + user.getUser());
 		UserDao dao = new UserDao();
 		//Se o usuario existir no banco de dados adicionamos ele na sessão(fazemos login)
 		if(dao.usuarioExiste(user).getUser() != null) {
 			session.setAttribute("usuario", dao.usuarioExiste(user));			
+			return "menu";
+		} else if(session.getAttribute("usuario") != null) {
 			return "menu";
 		} else {
 			return "redirect:login";
