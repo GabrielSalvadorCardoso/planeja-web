@@ -20,8 +20,21 @@
 					<td>Taxa de Juros</td> <td>${contaP.taxaJuros}</td>
 				</tr>
 				<tr id="valorPoupanca${contaP.idConta}">
-					<td>Valor em Conta</td> <td>${contaP.valor}</td>
+					<td>Valor em Conta</td>
+					<td>
+						<input type="number" value="${contaP.valor}" id="valorConta${contaP.idConta}" readonly/>
+					</td>
 				</tr>
+				
+				<tr>
+					<td>
+						<input type="button" value="Calcular Juros" onClick="calcJuros(${contaP.idConta})" />
+					</td>
+					<td>
+						<input type="number" min=1 step="1" id="meses${contaP.idConta}"/> meses
+					</td>
+				</tr>
+								
 				<tr>			
 					<td>
 						<input type="button" value="Acrescentar Valor" onClick='acrescentar(${contaP.idConta})' />

@@ -5,3 +5,14 @@ function acrescentar(id) {
 		$("#valorPoupanca" + id).html(valorAtualizado);
 	});
 }
+
+function calcJuros(id) {
+	var val = parseFloat($("#valorConta" + id).val());
+	var meses = parseInt($("#meses" + id).val());
+		
+	var cont;
+	for(cont = 1; cont <= meses; cont++) {
+		val = val + ((val / 100) * 0.5);
+	}
+	alert("Juros depois de " + meses + "meses: " + val);
+}
