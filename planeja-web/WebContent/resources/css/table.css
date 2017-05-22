@@ -1,0 +1,17 @@
+table {
+	border: solid #ccc;
+	border-radius: 5px;
+	display: inline-block;
+	margin: 3px;
+}
+td {
+	padding: 5px;
+	border: 1px #888 solid;
+	border-radius: 5px;
+}
+table input[type="button"] {
+	width: 150px;
+}
+table input[type="number"]{
+	width: 100px;
+}

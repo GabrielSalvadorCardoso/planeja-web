@@ -1,11 +1,9 @@
 package com.ginfohouse.planejaweb.controller;
 
 import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.ginfohouse.planejaweb.dao.ContaPoupancaDao;
 import com.ginfohouse.planejaweb.model.ContaPoupanca;
 import com.ginfohouse.planejaweb.model.User;
@@ -19,7 +17,7 @@ public class ServletController{
 	public String formContaPupanca() {
 		//O Spring tentará despachar a requisição para /WEB-INF/view/criar-poupanca.jsp
 		//O sufixo e o prefixo não precisam estar no retorno pois já foram definidos em spring-context.xml
-		return "criar-poupanca";
+		return "conta/criar-poupanca";
 	}
 	
 	@RequestMapping("/criaContaPoupanca")
@@ -30,7 +28,7 @@ public class ServletController{
 			dao.adiciona(cPoupanca);
 			return "poupanca-criada";
 		} catch(NullPointerException e) {
-			return "criar-poupanca";
+			return "conta/criar-poupanca";
 		}
 	}
 	
@@ -43,6 +41,20 @@ public class ServletController{
 		return "conta/mostrar-contas";
 		//Futuramente será implementado um redirecionamento para a listagem de Fundos de Renda Fixa(FRF)
 		//return "forward:mostrarContasFRF";
+	}
+	
+	//Toda Action pode receber um ServletResponse como parametro
+	@RequestMapping("depositar")
+	public String depositar(Long idConta, double valor, Model model) {
+		System.out.println("Id da Conta: " + idConta + "\nValor: " + valor);
+		ContaPoupancaDao dao = new ContaPoupancaDao();
+		dao.deposito(idConta, valor);
+		
+		model.addAttribute("contaP", dao.buscaPorId(idConta));
+		
+		//O redirecionamento da requisição aciona a função de callback
+		//O JSP para o qual a requisição é redirecionada será enviado como argumento para a função de callback
+		return "conta/valorAtualizado";
 	}
 }
 

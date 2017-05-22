@@ -54,4 +54,45 @@ public class ContaPoupancaDao {
 		
 		return contas;
 	}
+	
+	public ContaPoupanca buscaPorId(Long id) {
+		ContaPoupanca conta = new ContaPoupanca();
+		String sql = "select * from conta_poupanca where id_conta = ?";
+		
+		try(Connection connection = new ConnectionFactory().getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setLong(1, id);			
+			ResultSet rs = statement.executeQuery();
+			
+			if(rs.next()) {
+				conta.setIdConta(rs.getLong("id_conta"));
+				conta.setIdUser(rs.getLong("id_user"));
+				conta.setTaxaJuros(rs.getFloat("taxa_juros"));
+				conta.setValor(rs.getDouble("valor"));
+			}
+			rs.close();
+			statement.close();
+			
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		return conta;
+	}
+	
+	public void deposito(Long idConta, double deposito) {
+		String sql = "update conta_poupanca set valor = ? where id_conta = ?";
+		ContaPoupanca conta = buscaPorId(idConta);
+		double novoValor = conta.getValor() + deposito;
+		
+		try(Connection connection = new ConnectionFactory().getConnection()) {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setDouble(1, novoValor);
+			statement.setLong(2, conta.getIdConta());
+			statement.execute();
+			statement.close();
+		} catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

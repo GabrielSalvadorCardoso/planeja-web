@@ -25,5 +25,8 @@
   <mvc:interceptors>
   	<bean class="com.ginfohouse.planejaweb.controller.AutorizadorInterceptor" />
   </mvc:interceptors>
+  
+  <!-- Faz o controlador ignorar conteudo estático -->
+  <mvc:default-servlet-handler/>
 
 </beans>

@@ -20,7 +20,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		//O que determina o sucesso ou fracasso da requisição é o retorno deste método
 		
 		String uri = request.getRequestURI();//Retorna o endereco da requisição
-		if(uri.endsWith("login") || uri.endsWith("efetuarLogin") || uri.endsWith("cadastro") || uri.endsWith("addUser")) {
+		System.out.println("Requisição: " + uri);
+		if(uri.endsWith("login") || uri.endsWith("efetuarLogin") || uri.endsWith("cadastro")
+								|| uri.endsWith("addUser") || uri.contains("resources")) {
 			return true;
 		}
 		//Verificamos se existe um usuario registrado na sessão
