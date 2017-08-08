@@ -7,12 +7,15 @@ function acrescentar(id) {
 }
 
 function calcJuros(id) {
+	alert("Valor " + $("#valorConta" + id).val());
 	var val = parseFloat($("#valorConta" + id).val());
+	alert(isNaN(val));
 	var meses = parseInt($("#meses" + id).val());
+	alert(isNaN(meses));
 		
 	var cont;
 	for(cont = 1; cont <= meses; cont++) {
 		val = val + ((val / 100) * 0.5);
 	}
-	alert("Juros depois de " + meses + "meses: " + val);
+	alert("Juros depois de " + meses + " meses: " + val.toFixed(2));
 }
